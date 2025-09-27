@@ -38,8 +38,8 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
         
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        
-        user.Id = id;   
+
+        user.Id = id;
         await _repository.UpdateUser(user);
         
         return Ok(user);
