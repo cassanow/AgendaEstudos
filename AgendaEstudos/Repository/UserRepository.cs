@@ -19,6 +19,11 @@ public class UserRepository : IUserRepository
         return await _context.User.Where(u => u.Email == email).FirstOrDefaultAsync();
     }
 
+    public async Task<User> GetById(int id)
+    {
+        return await _context.User.Where(u => u.Id == id).FirstOrDefaultAsync();    
+    }
+
     public async Task<User> AddUser(User user)
     {
         _context.Add(user);
