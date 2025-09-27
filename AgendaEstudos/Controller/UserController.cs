@@ -29,19 +29,20 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
     }
 
     [HttpPut("UpdateUser/{id:int}")]
-    public async Task<IActionResult> UpdateUser(int id, UserDTO dto)
+    public async Task<IActionResult> UpdateUser(int id, User user)
     {
-        var user = await _repository.GetById(id);
+        await _repository.GetById(user.Id);
         
         if (user == null)
             return NotFound();
         
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
-        var response = UserMapping.Touser(dto);
         
-        return Ok(response);
+        user.Id = id;   
+        await _repository.UpdateUser(user);
+        
+        return Ok(user);
     }
 
     [HttpDelete("DeleteUser/{id:int}")]

@@ -1,4 +1,6 @@
 using AgendaEstudos.Database;
+using AgendaEstudos.Interface;
+using AgendaEstudos.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();          
 
 var app = builder.Build();
 

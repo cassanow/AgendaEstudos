@@ -1,4 +1,5 @@
-﻿using AgendaEstudos.Model;
+﻿using AgendaEstudos.DTO;
+using AgendaEstudos.Model;
 
 namespace AgendaEstudos.Interface;
 
