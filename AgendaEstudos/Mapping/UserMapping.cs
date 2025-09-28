@@ -11,7 +11,7 @@ public static class UserMapping
         {
             Email = userDTO.Email,
             Name = userDTO.Name,
-            Password = userDTO.Password,
+            PasswordHash = userDTO.Password,
         };
     }
 
@@ -21,7 +21,7 @@ public static class UserMapping
         {
             Email = user.Email,
             Name = user.Name,
-            Password = user.Password,
+            Password = user.PasswordHash,
         };
     }
 }

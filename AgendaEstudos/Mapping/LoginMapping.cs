@@ -10,7 +10,7 @@ public static class LoginMapping
         return new LoginDTO
         {
             Email = user.Email, 
-            Password = user.Password    
+            Password = user.PasswordHash  
         };
     }
 }
