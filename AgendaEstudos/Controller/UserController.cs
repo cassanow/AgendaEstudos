@@ -1,4 +1,5 @@
-﻿using AgendaEstudos.DTO;
+﻿using System.Security.Claims;
+using AgendaEstudos.DTO;
 using AgendaEstudos.Interface;
 using AgendaEstudos.Mapping;
 using AgendaEstudos.Model;
@@ -31,17 +32,22 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
     }
 
     [HttpPut("UpdateUser/{id:int}")]
-    public async Task<IActionResult> UpdateUser(int id, User user)
+    public async Task<IActionResult> UpdateUser(int id, UserDTO dto)
     {
-        await _repository.GetById(user.Id);
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         
+        if (userId != id)  
+            return Forbid();
+        
+        var user = await _repository.GetById(id);
         if (user == null)
             return NotFound();
         
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
-        user.Id = id;
+        
+        UserMapping.ToUserDTO(user, dto);
+        
         await _repository.UpdateUser(user);
         
         return Ok(user);
@@ -50,6 +56,11 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
     [HttpDelete("DeleteUser/{id:int}")]
     public async Task<IActionResult> DeleteUser(int id)
     {
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)); 
+        
+        if (userId != id)           
+            return Forbid();
+        
         var user = await _repository.GetById(id);
           
         if(user == null)

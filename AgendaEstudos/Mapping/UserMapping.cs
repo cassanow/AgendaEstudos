@@ -5,23 +5,10 @@ namespace AgendaEstudos.Mapping;
 
 public static class UserMapping
 {
-    public static User Touser(UserDTO userDTO)
+    public static void ToUserDTO(User user, UserDTO userDTO)
     {
-        return new User
-        {
-            Email = userDTO.Email,
-            Name = userDTO.Name,
-            PasswordHash = userDTO.Password,
-        };
-    }
-
-    public static UserDTO TouserDTO(User user)
-    {
-        return new UserDTO
-        {
-            Email = user.Email,
-            Name = user.Name,
-            Password = user.PasswordHash,
-        };
+        user.Email = userDTO.Email;     
+        user.Name = userDTO.Name;
+        user.PasswordHash = userDTO.Password;
     }
 }
