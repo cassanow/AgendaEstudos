@@ -2,6 +2,7 @@
 using AgendaEstudos.Interface;
 using AgendaEstudos.Mapping;
 using AgendaEstudos.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaEstudos.Controller;
@@ -18,6 +19,7 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
     }
     
     [HttpGet("GetByEmail/{email}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetByEmail(string email)
     {
         var user = await _repository.GetByEmail(email);

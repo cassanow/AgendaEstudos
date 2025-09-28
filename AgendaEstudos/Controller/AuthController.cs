@@ -1,4 +1,5 @@
 ﻿using AgendaEstudos.DTO;
+using AgendaEstudos.Enum;
 using AgendaEstudos.Interface;
 using AgendaEstudos.Mapping;
 using AgendaEstudos.Model;
@@ -13,11 +14,13 @@ public class AuthController : Microsoft.AspNetCore.Mvc.Controller
 {
     private readonly IUserRepository _repository;
     private readonly IPasswordService _service;
+    private readonly ITokenService _tokenService;
 
-    public AuthController(IUserRepository repository,  IPasswordService service)
+    public AuthController(IUserRepository repository,  IPasswordService service,  ITokenService tokenService)
     {
         _repository = repository;   
         _service = service;
+        _tokenService = tokenService;   
     }
     
     [HttpPost("Login")]
@@ -31,9 +34,9 @@ public class AuthController : Microsoft.AspNetCore.Mvc.Controller
         var valid = _service.VerifyPassword(user.PasswordHash, dto.Password);
         
         if (!valid)
-            return Unauthorized("Username or password is incorrect");  
+            return Unauthorized("Username or password is incorrect");
         
-        return Ok(dto);        
+        return Ok(_tokenService.GenerateToken(user));        
     }
 
     [HttpPost("Register")]
@@ -53,7 +56,8 @@ public class AuthController : Microsoft.AspNetCore.Mvc.Controller
             Email = dto.Email,
         };
         
-        response.PasswordHash = _service.HashPassword(dto.Password);        
+        response.PasswordHash = _service.HashPassword(dto.Password);
+        response.Role = Role.User;
         await _repository.AddUser(response);
         
         return Ok(response);        

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AgendaEstudos.Enum;
 
 namespace AgendaEstudos.Model;
 
@@ -17,4 +18,7 @@ public class User
     
     [Required]
     public string PasswordHash { get; set; }
+    
+    [Required]  
+    public Role Role { get; set; }      
 }
