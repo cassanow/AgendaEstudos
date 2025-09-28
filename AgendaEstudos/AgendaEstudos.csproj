@@ -16,4 +16,9 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.9" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="AgendaEstudos.db-shm" />
+      <None Remove="AgendaEstudos.db-wal" />
+    </ItemGroup>
+
 </Project>
