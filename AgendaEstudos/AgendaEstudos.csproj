@@ -27,6 +27,8 @@
 
     <ItemGroup>
       <Compile Remove="Enum\Active.cs" />
+      <Compile Remove="Migrations\20250929175756_corrigindo_materiia.cs" />
+      <Compile Remove="Migrations\20250929175756_corrigindo_materiia.Designer.cs" />
     </ItemGroup>
 
 </Project>

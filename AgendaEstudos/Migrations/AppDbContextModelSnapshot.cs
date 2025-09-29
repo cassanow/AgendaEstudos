@@ -76,12 +76,17 @@ namespace AgendaEstudos.Migrations
             modelBuilder.Entity("AgendaEstudos.Model.Materia", b =>
                 {
                     b.HasOne("AgendaEstudos.Model.User", "User")
-                        .WithMany()
+                        .WithMany("Materias")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AgendaEstudos.Model.User", b =>
+                {
+                    b.Navigation("Materias");
                 });
 #pragma warning restore 612, 618
         }

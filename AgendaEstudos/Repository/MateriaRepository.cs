@@ -1,8 +1,10 @@
 ﻿using AgendaEstudos.Database;
 using AgendaEstudos.Interface;
 using AgendaEstudos.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgendaEstudos.Repository;
+
 
 public class MateriaRepository : IMateriaRepository
 {
@@ -12,24 +14,40 @@ public class MateriaRepository : IMateriaRepository
     {
         _context = context;
     }
-    
-    public Task<IEnumerable<Materia>> GetAllMaterias()
+
+    public async Task<Materia> GetMateria(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Materia.Where(m => m.Id == id).FirstOrDefaultAsync();
     }
 
-    public Task<Materia> Add(Materia materia)
+    public async Task<IEnumerable<Materia>> GetAllMaterias(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Materia.Where(u => u.UserId == id).ToListAsync();
     }
 
-    public Task<Materia> Update(Materia materia)
+    public async Task<bool> MateriaExists(string name)
     {
-        throw new NotImplementedException();
+       return await _context.Materia.AnyAsync(u => u.Nome == name);    
     }
 
-    public Task<Materia> Delete(Materia materia)
+    public async Task<Materia> Add(Materia materia)
     {
-        throw new NotImplementedException();
+        _context.Materia.Add(materia);          
+        await _context.SaveChangesAsync();  
+        return materia;
+    }
+
+    public async Task<Materia> Update(Materia materia)
+    {
+        _context.Entry(materia).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return materia; 
+    }
+
+    public async Task<bool> Delete(Materia materia)
+    {
+        _context.Materia.Remove(materia);   
+        await _context.SaveChangesAsync();
+        return true;
     }
 }
