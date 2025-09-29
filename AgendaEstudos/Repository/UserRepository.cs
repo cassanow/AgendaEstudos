@@ -14,6 +14,16 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
+    public async Task<bool> UserIsActive(int id)
+    {
+        return await _context.User.AnyAsync(u => u.Id == id &&  u.IsActive);    
+    }
+
+    public async Task SaveChanges()
+    {
+        await _context.SaveChangesAsync();  
+    }
+
     public async Task<User> GetByEmail(string email)
     {
         return await _context.User.Where(u => u.Email == email).FirstOrDefaultAsync();
@@ -40,7 +50,7 @@ public class UserRepository : IUserRepository
 
     public async Task<bool> DeleteUser(User user)
     {
-        _context.Remove(user);  
+        user.IsActive = false;
         await _context.SaveChangesAsync();  
         return true;
     }

@@ -5,7 +5,9 @@ namespace AgendaEstudos.Interface;
 
 public interface IUserRepository
 {
+    Task<bool> UserIsActive(int id);
     
+    Task SaveChanges();
     Task<User> GetByEmail(string email);
     
     Task<User> GetById(int id);     

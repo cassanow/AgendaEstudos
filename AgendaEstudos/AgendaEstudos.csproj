@@ -25,4 +25,8 @@
       <None Remove="AgendaEstudos.db-wal" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Enum\Active.cs" />
+    </ItemGroup>
+
 </Project>

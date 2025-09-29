@@ -20,5 +20,8 @@ public class User
     public string PasswordHash { get; set; }
     
     [Required]  
-    public Role Role { get; set; }      
+    public Role Role { get; set; }
+    
+    public bool IsActive { get; set; } = true; 
+
 }
