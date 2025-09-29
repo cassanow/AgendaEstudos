@@ -2,6 +2,7 @@
 using AgendaEstudos.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaEstudos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250929175234_adicionando_entidade_materia")]
+    partial class adicionando_entidade_materia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.9");
@@ -33,12 +36,7 @@ namespace AgendaEstudos.Migrations
                     b.Property<int>("Prioridade")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Materia");
                 });
@@ -71,17 +69,6 @@ namespace AgendaEstudos.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("AgendaEstudos.Model.Materia", b =>
-                {
-                    b.HasOne("AgendaEstudos.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
