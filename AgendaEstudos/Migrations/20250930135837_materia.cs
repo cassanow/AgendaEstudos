@@ -5,7 +5,7 @@
 namespace AgendaEstudos.Migrations
 {
     /// <inheritdoc />
-    public partial class corrigindo_materiia : Migration
+    public partial class materia : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

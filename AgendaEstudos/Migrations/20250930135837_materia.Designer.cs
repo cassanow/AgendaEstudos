@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaEstudos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250929175756_corrigindo_materiia")]
-    partial class corrigindo_materiia
+    [Migration("20250930135837_materia")]
+    partial class materia
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,12 +79,17 @@ namespace AgendaEstudos.Migrations
             modelBuilder.Entity("AgendaEstudos.Model.Materia", b =>
                 {
                     b.HasOne("AgendaEstudos.Model.User", "User")
-                        .WithMany()
+                        .WithMany("Materias")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AgendaEstudos.Model.User", b =>
+                {
+                    b.Navigation("Materias");
                 });
 #pragma warning restore 612, 618
         }
