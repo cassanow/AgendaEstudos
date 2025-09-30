@@ -4,6 +4,7 @@ namespace AgendaEstudos.Interface;
 
 public interface IMateriaRepository
 {
+    Task SaveChanges(); 
     Task<IEnumerable<Materia>> GetAllMaterias(int id);    
     
     Task<Materia> GetMateria(int id);   

@@ -24,7 +24,6 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
     }
     
     [HttpGet("GetByEmail/{email}")]
-    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetByEmail(string email)
     {
         var user = await _repository.GetByEmail(email);
@@ -35,7 +34,14 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
         if(!user.IsActive)
             return Unauthorized();
         
-        return Ok(user);
+        var response = new UserDTO
+        {
+            Email = user.Email,
+            Name = user.Name,
+            Materias = user.Materias
+        };
+        
+        return Ok(response);
     }
 
     [HttpPut("UpdateUser/{id:int}")]

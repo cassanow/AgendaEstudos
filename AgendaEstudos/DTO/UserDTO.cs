@@ -1,4 +1,6 @@
-﻿namespace AgendaEstudos.DTO;
+﻿using AgendaEstudos.Model;
+
+namespace AgendaEstudos.DTO;
 
 public class UserDTO
 {
@@ -7,4 +9,6 @@ public class UserDTO
     public string Email { get; set; }   
     
     public string Password { get; set; }    
+    
+    public ICollection<Materia> Materias { get; set; }
 }

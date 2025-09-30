@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AgendaEstudos.DTO;
 using AgendaEstudos.Enum;
 
 namespace AgendaEstudos.Model;

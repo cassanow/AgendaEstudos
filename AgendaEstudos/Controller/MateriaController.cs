@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using AgendaEstudos.DTO;
 using AgendaEstudos.Interface;
+using AgendaEstudos.Mapping;
 using AgendaEstudos.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,8 +24,11 @@ public class MateriaController : Microsoft.AspNetCore.Mvc.Controller
     [HttpGet("GetAllMaterias/{userId:int}")]
     public async Task<IActionResult> GetAll(int userId)
     {
-        
         var materias = await _materiaRepository.GetAllMaterias(userId);
+        
+        if(!materias.Any())
+            return NoContent();
+        
         
         return Ok(materias);    
     }
@@ -39,44 +43,40 @@ public class MateriaController : Microsoft.AspNetCore.Mvc.Controller
             return BadRequest(ModelState);
         
         if(await _materiaRepository.MateriaExists(dto.Nome))
-            return BadRequest("Essa materia ja existe");
+            return BadRequest();
 
         var response = new Materia
         {
             Nome = dto.Nome,
-            Descricao = dto.Descricao,
             Prioridade = dto.Prioridade,
             UserId = userId
         };
-
+        
         await _materiaRepository.Add(response);
         
         return Ok(response);    
     }
 
-    [HttpPatch("UpdateMateria")]
-    public async Task<IActionResult> UpdateMateria(int id, MateriaDTO dto)
+    [HttpPatch("UpdateMateria/{id:int}")]
+    public async Task<IActionResult> UpdateMateria(int id, UpdateMateriaDTO dto)
     {
         var materia = await _materiaRepository.GetMateria(id);
         
-        if(!await _materiaRepository.MateriaExists(dto.Nome))
-            return NotFound();      
+        if(materia == null) 
+            return NotFound();
         
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
 
         if (!string.IsNullOrEmpty(dto.Nome))
-            dto.Nome = materia.Nome;
+            materia.Nome = dto.Nome;    
         
-        if(!string.IsNullOrEmpty(dto.Descricao))
-            dto.Descricao = materia.Descricao;
+        if(dto.Prioridade != null)
+            materia.Prioridade = dto.Prioridade;
         
-        if(!string.IsNullOrEmpty(dto.Prioridade.ToString()))
-            dto.Prioridade = materia.Prioridade;
-
-        await _materiaRepository.Update(materia);
+        await _materiaRepository.SaveChanges();
         
-        return Ok(dto); 
+        return Ok(materia); 
     }
 
     [HttpDelete("DeleteMateria/{id:int}")]
@@ -88,8 +88,8 @@ public class MateriaController : Microsoft.AspNetCore.Mvc.Controller
         if(materia.UserId != userId)
             return Unauthorized();  
         
-        if(!await _materiaRepository.MateriaExists(materia.Nome))
-            return NotFound();
+        if (materia == null)
+            return NotFound();  
 
         await _materiaRepository.Delete(materia);
         return Ok();        

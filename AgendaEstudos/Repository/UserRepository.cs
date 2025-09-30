@@ -26,7 +26,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User> GetByEmail(string email)
     {
-        return await _context.User.Where(u => u.Email == email).FirstOrDefaultAsync();
+        return await _context.User.Where(u => u.Email == email).Include(u => u.Materias).FirstOrDefaultAsync();
     }
 
     public async Task<User> GetById(int id)

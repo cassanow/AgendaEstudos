@@ -14,7 +14,12 @@ public class MateriaRepository : IMateriaRepository
     {
         _context = context;
     }
-
+    
+    public async Task SaveChanges()
+    {
+        await _context.SaveChangesAsync();  
+    }
+    
     public async Task<Materia> GetMateria(int id)
     {
         return await _context.Materia.Where(m => m.Id == id).FirstOrDefaultAsync();
