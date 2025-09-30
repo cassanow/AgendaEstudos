@@ -38,7 +38,7 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
         {
             Email = user.Email,
             Name = user.Name,
-            Materias = user.Materias
+            Tarefas = user.Tarefas
         };
         
         return Ok(response);

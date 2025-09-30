@@ -13,7 +13,5 @@ public interface IMateriaRepository
     
     Task<Materia> Add(Materia materia);
     
-    Task<Materia> Update(Materia materia);
-    
     Task<bool> Delete(Materia materia);
 }

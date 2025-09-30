@@ -3,6 +3,7 @@ using System;
 using AgendaEstudos.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaEstudos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250930181040_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.9");
@@ -33,12 +36,15 @@ namespace AgendaEstudos.Migrations
                     b.Property<int>("TarefaId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("TarefaId1")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TarefaId");
+                    b.HasIndex("TarefaId1");
 
                     b.HasIndex("UserId");
 
@@ -60,7 +66,7 @@ namespace AgendaEstudos.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Prioridade")
+                    b.Property<int>("MateriaId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Titulo")
@@ -110,10 +116,8 @@ namespace AgendaEstudos.Migrations
             modelBuilder.Entity("AgendaEstudos.Model.Materia", b =>
                 {
                     b.HasOne("AgendaEstudos.Model.Tarefa", "Tarefa")
-                        .WithMany("Materias")
-                        .HasForeignKey("TarefaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("TarefaId1");
 
                     b.HasOne("AgendaEstudos.Model.User", "User")
                         .WithMany()
@@ -128,18 +132,11 @@ namespace AgendaEstudos.Migrations
 
             modelBuilder.Entity("AgendaEstudos.Model.Tarefa", b =>
                 {
-                    b.HasOne("AgendaEstudos.Model.User", "User")
+                    b.HasOne("AgendaEstudos.Model.User", null)
                         .WithMany("Tarefas")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("AgendaEstudos.Model.Tarefa", b =>
-                {
-                    b.Navigation("Materias");
                 });
 
             modelBuilder.Entity("AgendaEstudos.Model.User", b =>

@@ -25,5 +25,5 @@ public class User
     
     public bool IsActive { get; set; } = true; 
 
-    public ICollection<Materia> Materias { get; set; }  
+    public ICollection<Tarefa> Tarefas { get; set; }  
 }

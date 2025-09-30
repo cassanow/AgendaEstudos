@@ -61,6 +61,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IMateriaRepository, MateriaRepository>();
+builder.Services.AddScoped<ITarefaRepository, TarefaRepository>();      
 
 var app = builder.Build();
 

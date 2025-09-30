@@ -17,6 +17,11 @@ public class Materia
     
     public int UserId { get; set; }
     
+    public int TarefaId { get; set; }
+    
     [JsonIgnore]
-    public User User { get; set; }
+    public Tarefa? Tarefa { get; set; }
+    
+    [JsonIgnore]
+    public User? User { get; set; }
 }

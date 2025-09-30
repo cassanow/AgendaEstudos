@@ -5,25 +5,25 @@
 namespace AgendaEstudos.Migrations
 {
     /// <inheritdoc />
-    public partial class corrigindo_materia : Migration
+    public partial class corrigindo_dnv : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Descricao",
-                table: "Materia");
+            migrationBuilder.AddColumn<int>(
+                name: "Prioridade",
+                table: "Tarefa",
+                type: "INTEGER",
+                nullable: false,
+                defaultValue: 0);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Descricao",
-                table: "Materia",
-                type: "TEXT",
-                nullable: false,
-                defaultValue: "");
+            migrationBuilder.DropColumn(
+                name: "Prioridade",
+                table: "Tarefa");
         }
     }
 }

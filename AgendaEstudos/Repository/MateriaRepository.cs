@@ -41,13 +41,7 @@ public class MateriaRepository : IMateriaRepository
         await _context.SaveChangesAsync();  
         return materia;
     }
-
-    public async Task<Materia> Update(Materia materia)
-    {
-        _context.Entry(materia).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
-        return materia; 
-    }
+    
 
     public async Task<bool> Delete(Materia materia)
     {

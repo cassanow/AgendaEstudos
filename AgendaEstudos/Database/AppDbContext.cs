@@ -10,4 +10,6 @@ public class AppDbContext : DbContext
     public DbSet<User> User { get; set; }
     
     public DbSet<Materia> Materia { get; set; }
+    
+    public DbSet<Tarefa> Tarefa { get; set; }   
 }
