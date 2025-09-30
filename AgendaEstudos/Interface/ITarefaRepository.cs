@@ -4,7 +4,7 @@ namespace AgendaEstudos.Interface;
 
 public interface ITarefaRepository
 {
-    Task <ICollection<Tarefa>> GetTarefas();
+    Task <ICollection<Tarefa>> GetTarefas(int userId);
     
     Task<Tarefa> GetTarefa(int id);
     

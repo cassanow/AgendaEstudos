@@ -30,15 +30,10 @@ namespace AgendaEstudos.Migrations
                     b.Property<int>("Prioridade")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TarefaId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TarefaId");
 
                     b.HasIndex("UserId");
 
@@ -60,6 +55,9 @@ namespace AgendaEstudos.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("MateriaId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Prioridade")
                         .HasColumnType("INTEGER");
 
@@ -71,6 +69,8 @@ namespace AgendaEstudos.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MateriaId");
 
                     b.HasIndex("UserId");
 
@@ -109,25 +109,23 @@ namespace AgendaEstudos.Migrations
 
             modelBuilder.Entity("AgendaEstudos.Model.Materia", b =>
                 {
-                    b.HasOne("AgendaEstudos.Model.Tarefa", "Tarefa")
-                        .WithMany("Materias")
-                        .HasForeignKey("TarefaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("AgendaEstudos.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Tarefa");
-
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("AgendaEstudos.Model.Tarefa", b =>
                 {
+                    b.HasOne("AgendaEstudos.Model.Materia", null)
+                        .WithMany("Tarefas")
+                        .HasForeignKey("MateriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AgendaEstudos.Model.User", "User")
                         .WithMany("Tarefas")
                         .HasForeignKey("UserId")
@@ -137,9 +135,9 @@ namespace AgendaEstudos.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("AgendaEstudos.Model.Tarefa", b =>
+            modelBuilder.Entity("AgendaEstudos.Model.Materia", b =>
                 {
-                    b.Navigation("Materias");
+                    b.Navigation("Tarefas");
                 });
 
             modelBuilder.Entity("AgendaEstudos.Model.User", b =>

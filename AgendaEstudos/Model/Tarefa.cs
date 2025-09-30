@@ -22,11 +22,13 @@ public class Tarefa
     
     public int UserId { get; set; }
     
+    
+    public int MateriaId { get; set; }
+    
     [Required]
     public Prioridade? Prioridade { get; set; }
     
     [JsonIgnore]
     public User? User { get; set; }
     
-    public ICollection<Materia>? Materias { get; set; }
 }

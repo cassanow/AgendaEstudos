@@ -14,9 +14,9 @@ public class TarefaRepository : ITarefaRepository
         _context = context;
     }
     
-    public async Task<ICollection<Tarefa>> GetTarefas()
+    public async Task<ICollection<Tarefa>> GetTarefas(int userId)
     {
-        return await _context.Tarefa.ToListAsync();
+        return await _context.Tarefa.Where(t => t.UserId == userId).ToListAsync();
     }
 
     public async Task<Tarefa> GetTarefa(int id)
@@ -33,7 +33,6 @@ public class TarefaRepository : ITarefaRepository
 
     public async Task<Tarefa> UpdateTarefa(Tarefa tarefa)
     {
-        _context.Entry(tarefa).State = EntityState.Modified;                
         await _context.SaveChangesAsync();
         return tarefa;          
     }

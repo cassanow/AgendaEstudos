@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AgendaEstudos.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,6 +29,27 @@ namespace AgendaEstudos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Materia",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    Prioridade = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Materia", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Materia_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tarefa",
                 columns: table => new
                 {
@@ -39,11 +60,18 @@ namespace AgendaEstudos.Migrations
                     DataInicio = table.Column<DateTime>(type: "TEXT", nullable: false),
                     DataFim = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    MateriaId = table.Column<int>(type: "INTEGER", nullable: false)
+                    MateriaId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Prioridade = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tarefa", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tarefa_Materia_MateriaId",
+                        column: x => x.MateriaId,
+                        principalTable: "Materia",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Tarefa_User_UserId",
                         column: x => x.UserId,
@@ -52,43 +80,15 @@ namespace AgendaEstudos.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Materia",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(type: "TEXT", nullable: false),
-                    Prioridade = table.Column<int>(type: "INTEGER", nullable: false),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    TarefaId = table.Column<int>(type: "INTEGER", nullable: false),
-                    TarefaId1 = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Materia", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Materia_Tarefa_TarefaId1",
-                        column: x => x.TarefaId1,
-                        principalTable: "Tarefa",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Materia_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Materia_TarefaId1",
-                table: "Materia",
-                column: "TarefaId1");
-
             migrationBuilder.CreateIndex(
                 name: "IX_Materia_UserId",
                 table: "Materia",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tarefa_MateriaId",
+                table: "Tarefa",
+                column: "MateriaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tarefa_UserId",
@@ -100,10 +100,10 @@ namespace AgendaEstudos.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Materia");
+                name: "Tarefa");
 
             migrationBuilder.DropTable(
-                name: "Tarefa");
+                name: "Materia");
 
             migrationBuilder.DropTable(
                 name: "User");
