@@ -7,10 +7,17 @@
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password})
         });
+        
+        if(response.ok){
+            const data = await response.json();
+            localStorage.setItem('token', JSON.stringify(data.token));
+            localStorage.setItem('userEmail', JSON.stringify(data.email));
+            
+            window.location.href = 'Dashboard.html';
+        }else{
+            alert("Login failed");
+        }
 
-        const data = await response.json();
-        localStorage.setItem('token', JSON.stringify(data.token));
-        console.log("logado com sucesso")
     }catch(err){
         console.log(err)        
     }

@@ -10,8 +10,13 @@
             body: JSON.stringify({name, email, password  })
         })
 
-        const data = await response.json();
-        console.log("registrado com sucesso", data)
+        if(response.ok){
+            alert('Cadastro realizado com sucesso')
+            window.location.href = 'Login.html';
+        }else{
+            alert('Erro ao cadastrar');
+        }
+        
     }catch(err){
         console.log(err)    
     }
