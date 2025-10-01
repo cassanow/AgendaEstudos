@@ -36,7 +36,9 @@ public class AuthController : Microsoft.AspNetCore.Mvc.Controller
         if (!valid)
             return Unauthorized("Username or password is incorrect");
         
-        return Ok(_tokenService.GenerateToken(user));        
+        var token = _tokenService.GenerateToken(user);
+        
+        return Ok(new { Token = token });        
     }
 
     [HttpPost("Register")]
