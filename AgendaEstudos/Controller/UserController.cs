@@ -68,38 +68,7 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
         
         return Ok(user);
     }
-
-    [HttpPatch("ParcialUpdateUser/{id:int}")]
-    public async Task<IActionResult> PatchUser(int id, UpdateUserDTO dto)
-    {
-        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier); 
-        
-        if(!int.TryParse(userIdString, out var userId) || string.IsNullOrEmpty(userIdString) || userId != id || !await _repository.UserIsActive(userId))
-            return Unauthorized();
-        
-        var user = await _repository.GetById(id);   
-        if (user == null)
-            return NotFound();  
-        
-        if(!await _repository.UserIsActive(userId))
-            return Unauthorized();      
-        
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-        
-        if(!string.IsNullOrEmpty(dto.Email)) 
-            user.Email = dto.Email;
-        
-        if (!string.IsNullOrEmpty(dto.Password))    
-            user.PasswordHash = _service.HashPassword(dto.Password);    
-        
-        if (!string.IsNullOrEmpty(dto.Name))
-            user.Name = dto.Name;
-
-        await _repository.SaveChanges();
-        
-        return Ok(new { Mensagem = "Alterado com sucesso!" });    
-    }
+    
 
     [HttpDelete("DeleteUser/{id:int}")]
     public async Task<IActionResult> DeleteUser(int id)

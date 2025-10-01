@@ -58,7 +58,7 @@ public class MateriaController : Microsoft.AspNetCore.Mvc.Controller
         return Ok(response);    
     }
 
-    [HttpPatch("UpdateMateria/{id:int}")]
+    [HttpPut("UpdateMateria/{id:int}")]
     public async Task<IActionResult> UpdateMateria(int id, UpdateMateriaDTO dto)
     {
         var materia = await _materiaRepository.GetMateria(id);
@@ -66,16 +66,10 @@ public class MateriaController : Microsoft.AspNetCore.Mvc.Controller
         if(materia == null) 
             return NotFound();
         
-        if(!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        if (!string.IsNullOrEmpty(dto.Nome))
-            materia.Nome = dto.Nome;    
+        materia.Nome = dto.Nome;
+        materia.Prioridade = dto.Prioridade;    
         
-        if(dto.Prioridade != null)
-            materia.Prioridade = dto.Prioridade;
-        
-        await _materiaRepository.SaveChanges();
+        await _materiaRepository.Update(materia);
         
         return Ok(materia); 
     }

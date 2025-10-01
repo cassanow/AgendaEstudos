@@ -56,31 +56,19 @@ public class TarefaController : Microsoft.AspNetCore.Mvc.Controller
         return Ok(response);    
     }
 
-    [HttpPatch("UpdateTarefas{id:int}")]
+    [HttpPut("UpdateTarefa/{id:int}")]
     public async Task<IActionResult> UpdateTarefas(int id, TarefaDTO dto)
     {
         var tarefa = await _tarefaRepository.GetTarefa(id);
         
         if(tarefa == null)
             return NotFound();
-        
-        if(!ModelState.IsValid) 
-            return BadRequest(ModelState);
 
-        if (!string.IsNullOrEmpty(dto.Titulo))
-            tarefa.Titulo = dto.Titulo;
-        
-        if (!string.IsNullOrEmpty(dto.Descricao))
-            tarefa.Descricao = dto.Descricao;
-        
-        if(dto.DataInicio != null)
-            tarefa.DataInicio = dto.DataInicio;
-        
-        if(dto.DataFim != null)
-            tarefa.DataFim = dto.DataFim;
-        
-        if(dto.Prioridade != null)
-            tarefa.Prioridade = dto.Prioridade;
+        tarefa.Titulo = dto.Titulo;
+        tarefa.Descricao = dto.Descricao; 
+        tarefa.DataInicio = dto.DataInicio;
+        tarefa.DataFim = dto.DataFim;
+        tarefa.Prioridade = dto.Prioridade;
         
         await _tarefaRepository.UpdateTarefa(tarefa);   
         
