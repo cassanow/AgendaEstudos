@@ -33,7 +33,7 @@ public class TarefaController : Microsoft.AspNetCore.Mvc.Controller
     }
 
     [HttpPost("AddTarefas")]
-    public async Task<IActionResult> AddTarefas(TarefaDTO dto)
+    public async Task<IActionResult> AddTarefas(int materiaId, TarefaDTO dto)
     {
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         
@@ -47,7 +47,8 @@ public class TarefaController : Microsoft.AspNetCore.Mvc.Controller
             DataInicio = dto.DataInicio,
             DataFim = dto.DataFim,
             Prioridade = dto.Prioridade,
-            UserId = userId
+            UserId = userId,
+            MateriaId = materiaId
         };
         
         await _tarefaRepository.AddTarefa(response);

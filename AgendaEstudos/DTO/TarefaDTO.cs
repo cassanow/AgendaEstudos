@@ -13,5 +13,4 @@ public class TarefaDTO
     public DateTime DataInicio { get; set; }
     
     public DateTime DataFim { get; set; }   
-
 }

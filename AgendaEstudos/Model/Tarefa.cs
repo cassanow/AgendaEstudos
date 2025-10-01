@@ -31,4 +31,7 @@ public class Tarefa
     [JsonIgnore]
     public User? User { get; set; }
     
+    [JsonIgnore]
+    public Materia? Materia { get; set; }
+    
 }

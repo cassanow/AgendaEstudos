@@ -9,7 +9,7 @@ public interface IMateriaRepository
     
     Task<Materia> GetMateria(int id);   
     
-    Task<bool> MateriaExists(string name);   
+    Task<bool> MateriaExists(int id);   
     
     Task<Materia> Add(Materia materia);
     

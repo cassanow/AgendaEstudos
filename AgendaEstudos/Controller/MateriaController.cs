@@ -42,8 +42,6 @@ public class MateriaController : Microsoft.AspNetCore.Mvc.Controller
         if(!ModelState.IsValid) 
             return BadRequest(ModelState);
         
-        if(await _materiaRepository.MateriaExists(dto.Nome))
-            return BadRequest();
 
         var response = new Materia
         {
@@ -51,6 +49,9 @@ public class MateriaController : Microsoft.AspNetCore.Mvc.Controller
             Prioridade = dto.Prioridade,
             UserId = userId
         };
+        
+        if(await _materiaRepository.MateriaExists(response.Id))
+            return BadRequest();
         
         await _materiaRepository.Add(response);
         

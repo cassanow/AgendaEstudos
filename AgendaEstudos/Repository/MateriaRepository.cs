@@ -27,12 +27,12 @@ public class MateriaRepository : IMateriaRepository
 
     public async Task<IEnumerable<Materia>> GetAllMaterias(int id)
     {
-        return await _context.Materia.Where(u => u.UserId == id).ToListAsync();
+        return await _context.Materia.Where(u => u.UserId == id).Include(u => u.Tarefas).ToListAsync();
     }
 
-    public async Task<bool> MateriaExists(string name)
+    public async Task<bool> MateriaExists(int id)
     {
-       return await _context.Materia.AnyAsync(u => u.Nome == name);    
+       return await _context.Materia.AnyAsync(u => u.Id == id);    
     }
 
     public async Task<Materia> Add(Materia materia)

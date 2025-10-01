@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace AgendaEstudos.Controller;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]     
 public class UserController : Microsoft.AspNetCore.Mvc.Controller
@@ -34,11 +35,13 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
         if(!user.IsActive)
             return Unauthorized();
         
-        var response = new UserDTO
+        var response = new User
         {
+            Id = user.Id,   
             Email = user.Email,
             Name = user.Name,
-            Tarefas = user.Tarefas
+            Tarefas = user.Tarefas,
+            IsActive = user.IsActive
         };
         
         return Ok(response);

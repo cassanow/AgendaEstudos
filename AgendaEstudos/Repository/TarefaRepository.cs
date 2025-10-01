@@ -23,7 +23,7 @@ public class TarefaRepository : ITarefaRepository
     {
         return await _context.Tarefa.Where(t => t.Id == id).FirstOrDefaultAsync();
     }
-
+    
     public async Task<Tarefa> AddTarefa(Tarefa tarefa)
     {
         _context.Tarefa.Add(tarefa); 

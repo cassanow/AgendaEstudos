@@ -60,6 +60,6 @@ public class AuthController : Microsoft.AspNetCore.Mvc.Controller
         response.Role = Role.User;
         await _repository.AddUser(response);
         
-        return Ok(response);        
+        return Ok(dto);        
     }
 }

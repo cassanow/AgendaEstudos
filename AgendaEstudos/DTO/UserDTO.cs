@@ -10,5 +10,4 @@ public class UserDTO
     
     public string Password { get; set; }    
     
-    public ICollection<Tarefa> Tarefas { get; set; }
 }
