@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #f1f1f1;
     color: #333;
     display: flex;
     min-height: 100vh;
@@ -15,7 +15,7 @@ body {
 
 .sidebar {
     width: 250px;
-    background: #2c3e50;
+    background-color: dodgerblue;
     color: white;
     padding: 0;
     position: fixed;
@@ -28,8 +28,7 @@ body {
 
 .sidebar-header {
     padding: 2rem 1.5rem;
-    background: #222d3c;
-    border-bottom: 1px solid #34495e;
+    background-color: dodgerblue;
 }
 
 .logo {
@@ -46,7 +45,7 @@ body {
     display: flex;
     align-items: center;
     padding: 1rem 1.5rem;
-    color: #bdc3c7;
+    color: white;
     text-decoration: none;
     transition: all 0.3s;
     cursor: pointer;
@@ -54,13 +53,13 @@ body {
 }
 
 .menu-item:hover {
-    background: #34495e;
+    background-color: lightskyblue;
     color: white;
     border-left-color: #3498db;
 }
 
 .menu-item.active {
-    background: #34495e;
+    background-color: lightskyblue;
     color: white;
     border-left-color: #3498db;
 }
@@ -75,13 +74,12 @@ body {
     bottom: 0;
     width: 100%;
     padding: 1rem 1.5rem;
-    background: #1a252f;
-    border-top: 1px solid #34495e;
+    background-color: dodgerblue;
 }
 
 .btn-logout {
     width: 100%;
-    background: #e74c3c;
+    background-color: lightskyblue;
     color: white;
     border: none;
     padding: 0.8rem;
@@ -92,8 +90,8 @@ body {
 }
 
 .btn-logout:hover {
-    background: #c0392b;
-    transform: translateY(-2px);
+    background-color: lightskyblue;
+    transform: translateY(-5px);
 }
 
 .main-content {
@@ -101,23 +99,6 @@ body {
     flex: 1;
     padding: 2rem;
     width: calc(100% - 250px);
-}
-
-
-.topbar {
-    background: white;
-    padding: 1.5rem 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.topbar h1 {
-    font-size: 1.8rem;
-    color: #2c3e50;
 }
 
 .user-info {
@@ -132,17 +113,16 @@ body {
     max-width: 1400px;
 }
 
-
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
-    margin-bottom: 2rem;
+    margin-bottom: 5rem;
 }
 
 .stat-card {
     background: white;
-    padding: 1.5rem;
+    padding: 2.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     border-left: 4px solid #3498db;
@@ -172,7 +152,7 @@ body {
 
 .stat-card h3 {
     color: #7f8c8d;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     margin-bottom: 0.8rem;
     font-weight: 500;
     text-transform: uppercase;
@@ -194,11 +174,67 @@ body {
     margin-bottom: 2rem;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content button{
+    width: 80%;
+    height: 40px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3a9bdc;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: lightskyblue;
+}
+
+.modal-content {
+    text-align: center;
+}
+
+.modal-content input{
+    width: 97%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #a3a3a3;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.modal-content select{
+    width: 97%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #a3a3a3;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid #ecf0f1;
 }
@@ -222,7 +258,7 @@ body {
 }
 
 .btn-primary:hover {
-    background: #2980b9;
+    background-color: lightskyblue;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
 }
