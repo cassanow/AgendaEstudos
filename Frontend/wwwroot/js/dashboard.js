@@ -60,7 +60,6 @@ window.addEventListener('click', (event) => {
         modalMateria.style.display = "none";
     }
 });
-
 document.getElementById('btn-salvar').addEventListener('click', async function addMateria() {
     try{
         const token = localStorage.getItem('token');
