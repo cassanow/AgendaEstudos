@@ -9,7 +9,6 @@
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({name, email, password  })
         })
-
         if(!response.ok){
             const error = document.getElementById("register-error")
             error.style.display = "block";
