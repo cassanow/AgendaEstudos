@@ -6,17 +6,22 @@
     <link rel="stylesheet" href="css/register.css">
 </head>
 <body>
+<div id="register-error" class="error-box">
+    Erro ao registrar
+</div>
+<br>
 <div class="register-box">
     <h2>Register</h2>
     <label for="register-name">Nome</label><br>
-    <input id="register-name" type="text" placeholder="digite o nome de usuario"><br>
+    <input id="register-name" type="text" placeholder="digite o nome de usuario"><br><br>
     
     <label for="register-email">Email</label><br>
-    <input id="register-email" type="email" placeholder="digite o email"><br>
+    <input id="register-email" type="email" placeholder="digite o email"><br><br>
 
     <label for="register-password">Senha</label><br>
     <input id="register-password" type="password" placeholder="digite sua senha"><br>
-    <button onclick="register()">Confirmar</button>
+    <button onclick="register()">Confirmar</button><br>
+    <a href="Login.html">Já possui cadastro?</a>
 </div>
 </body>
 <script src="js/register.js"></script>

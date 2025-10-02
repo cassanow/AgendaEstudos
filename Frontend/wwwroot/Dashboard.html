@@ -35,10 +35,6 @@
 
 
 <main class="main-content">
-    <div class="topbar">
-        <h1>Dashboard</h1>
-    </div>
-
     
     <div class="container">
         <!-- Stats Cards -->
@@ -72,7 +68,48 @@
             </div>
         </section>
 
-       
+        <div id="modalMateria" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span id="closeModalMateria" class="close">&times;</span>
+                <h2>Nova Matéria</h2>
+                <br>
+                <label for="nomeMateria">Nome da Matéria:</label><br>
+                <input type="text" id="nomeMateria" placeholder="Digite o nome" required /><br>
+                <label for="prioridadeMateria">Prioridade:</label><br>
+                    <select id="prioridadeMateria" required>
+                        <option value="">Selecione</option>
+                        <option value="0">Alta</option>
+                        <option value="1">Média</option>
+                        <option value="2">Baixa</option>
+                    </select>
+                    <button id="btn-salvar">Salvar</button>
+            </div>
+        </div>
+
+        <div id="modalTarefa" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h2>Nova Tarefa</h2>
+                <form id="formTarefa">
+                    <label for="nomeTarefa">Nome da Tarefa:</label>
+                    <input type="text" id="nomeTarefa" placeholder="Digite o nome" required />
+
+                    <label for="numeroTarefa">Número (0, 1 ou 2):</label>
+                    <select id="numeroTarefa" required>
+                        <option value="">--Selecione--</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+
+                    <label for="descricaoTarefa">Descrição:</label>
+                    <textarea id="descricaoTarefa" placeholder="Descrição da tarefa" required></textarea>
+
+                    <button type="submit">Salvar</button>
+                </form>
+            </div>
+        </div>
+        
         <section class="section">
             <div class="section-header">
                 <h2>Minhas Tarefas</h2>

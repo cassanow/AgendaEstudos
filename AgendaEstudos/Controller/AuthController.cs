@@ -38,6 +38,9 @@ public class AuthController : Microsoft.AspNetCore.Mvc.Controller
         
         var token = _tokenService.GenerateToken(user);
         
+        if(user.PasswordHash != dto.Password &&  user.Email != dto.Email)
+            return Unauthorized("Username or password is incorrect");
+        
         return Ok(new { Token = token });        
     }
 
@@ -45,7 +48,7 @@ public class AuthController : Microsoft.AspNetCore.Mvc.Controller
     public async Task<IActionResult> Register(UserDTO dto)
     {
         var user = await _repository.GetByEmail(dto.Email);
-        
+
         if (user != null)
             return BadRequest("User already exists");
         

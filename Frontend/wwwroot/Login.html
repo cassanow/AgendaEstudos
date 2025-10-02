@@ -7,14 +7,20 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+<div id="login-error" class="error-box">
+    Usuário ou senha inválidos
+</div>
+    <br>
+
 <div class="login-box">
     <h2>Login</h2>
     <label for="login-email">Email</label><br>
-    <input id="login-email" type="email" placeholder="digite o email"><br>
+    <input id="login-email" type="email" placeholder="digite o email"><br><br>
 
     <label for="login-password">Senha</label><br>
     <input id="login-password" type="password" placeholder="digite sua senha"><br>
-    <button onclick="login()">Confirmar</button>
+    <button id="btn-login">Confirmar</button><br>
+    <a href="Register.html">Ainda não é cadastrado?</a>
 </div>
 <script src="js/login.js"></script>
 </body>

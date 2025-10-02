@@ -10,11 +10,16 @@
             body: JSON.stringify({name, email, password  })
         })
 
-        if(response.ok){
-            alert('Cadastro realizado com sucesso')
-            window.location.href = 'Login.html';
+        if(!response.ok){
+            const error = document.getElementById("register-error")
+            error.style.display = "block";
+
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 5000);
+
         }else{
-            alert('Erro ao cadastrar');
+            window.location.href = 'Login.html';
         }
         
     }catch(err){
