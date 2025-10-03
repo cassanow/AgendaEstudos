@@ -40,6 +40,11 @@ public class TarefaController : Microsoft.AspNetCore.Mvc.Controller
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
 
+        var existe = await _tarefaRepository.TarefaExists(userId, dto.Titulo, materiaId);
+        
+        if(existe)
+            return BadRequest();
+
         var response = new Tarefa
         {
             Titulo = dto.Titulo,

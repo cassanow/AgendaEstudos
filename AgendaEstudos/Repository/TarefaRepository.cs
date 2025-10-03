@@ -1,4 +1,5 @@
 ﻿using AgendaEstudos.Database;
+using AgendaEstudos.DTO;
 using AgendaEstudos.Interface;
 using AgendaEstudos.Model;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,10 @@ public class TarefaRepository : ITarefaRepository
         return await _context.Tarefa.Where(t => t.Id == id).FirstOrDefaultAsync();
     }
     
+    public async Task<bool> TarefaExists(int userId, string titulo, int materiaId)
+    {
+        return await _context.Tarefa.AnyAsync(t => t.UserId == userId && t.Titulo == titulo && t.MateriaId == materiaId);
+    }
     public async Task<Tarefa> AddTarefa(Tarefa tarefa)
     {
         _context.Tarefa.Add(tarefa); 

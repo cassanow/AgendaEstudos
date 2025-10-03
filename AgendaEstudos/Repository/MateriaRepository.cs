@@ -15,11 +15,6 @@ public class MateriaRepository : IMateriaRepository
         _context = context;
     }
     
-    public async Task SaveChanges()
-    {
-        await _context.SaveChangesAsync();  
-    }
-    
     public async Task<Materia> GetMateria(int id)
     {
         return await _context.Materia.Where(m => m.Id == id).FirstOrDefaultAsync();
@@ -30,9 +25,9 @@ public class MateriaRepository : IMateriaRepository
         return await _context.Materia.Where(u => u.UserId == id).Include(u => u.Tarefas).ToListAsync();
     }
 
-    public async Task<bool> MateriaExists(int id)
+    public async Task<bool> MateriaExists(string nome, int id)
     {
-       return await _context.Materia.AnyAsync(u => u.Id == id);    
+       return await _context.Materia.AnyAsync(u => u.Id == id &&  u.Nome == nome);    
     }
 
     public async Task<Materia> Add(Materia materia)
