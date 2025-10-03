@@ -28,8 +28,8 @@
 
         } else {
             const data = await response.json();
-            console.log(data);
             localStorage.setItem('token', data.token);
+            localStorage.setItem('user', data.user);
             window.location.href = 'Dashboard.html';
         }
 

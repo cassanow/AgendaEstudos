@@ -41,7 +41,7 @@ public class AuthController : Microsoft.AspNetCore.Mvc.Controller
         if(user.PasswordHash != dto.Password &&  user.Email != dto.Email)
             return Unauthorized("Username or password is incorrect");
         
-        return Ok(new { Token = token });        
+        return Ok(new { Token = token, User = user.Name});        
     }
 
     [HttpPost("Register")]

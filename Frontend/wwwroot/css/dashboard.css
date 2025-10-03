@@ -13,7 +13,7 @@ body {
 }
 
 .sidebar {
-    width: 250px;
+    width: 230px;
     background-color: dodgerblue;
     color: white;
     padding: 0;
@@ -23,6 +23,18 @@ body {
     top: 0;
     overflow-y: auto;
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    text-shadow: 0 0 10px black;
+    text-align: center;
+}
+
+
+.user-area{
+    font-size: 17px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    text-shadow: 0 0 5px black;
 }
 
 .sidebar-header {
@@ -86,6 +98,7 @@ body {
     cursor: pointer;
     font-weight: 500;
     transition: all 0.3s;
+    text-shadow: 0 0 10px black;
 }
 
 .btn-logout:hover {
@@ -106,6 +119,10 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     margin-bottom: 3rem;
+}
+
+.loading-materia{
+    list-style: none;
 }
 
 .modal {

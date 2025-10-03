@@ -6,6 +6,15 @@ document.getElementById("btn-logout").addEventListener("click", function() {
 })
 
 
+
+function user(){
+    const userArea = document.getElementById("user-area");
+    const name = localStorage.getItem('user')
+    
+    userArea.innerHTML = 'Bem vindo ' + name;
+}
+
+
 const modalTarefa = document.getElementById('modal-tarefa');
 const btnNovaTarefa = document.getElementById('btn-add-tarefa');
 const closeModal = document.getElementById('close-tarefa');
@@ -176,5 +185,6 @@ async function ListaTarefas(){
 ListaMaterias();
 ListaTarefas();
 getAllMaterias();
+user();
 
 
