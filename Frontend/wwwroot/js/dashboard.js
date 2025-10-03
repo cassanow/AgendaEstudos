@@ -12,10 +12,9 @@ document.getElementById("btn-logout").addEventListener("click", function() {
 })
 
 
-const modalTarefa = document.getElementById('modalTarefa');
+const modalTarefa = document.getElementById('modal-tarefa');
 const btnNovaTarefa = document.getElementById('btn-add-tarefa');
-const closeModal = document.getElementById('closeModal');
-const formTarefa = document.getElementById('formTarefa');
+const closeModal = document.getElementById('close-tarefa');
 btnNovaTarefa.addEventListener('click', () => {
     modalTarefa.style.display = "block";
 });
@@ -29,17 +28,15 @@ window.addEventListener('click', (event) => {
         modalTarefa.style.display = "none";
     }
 });
-formTarefa.addEventListener('submit', async function addTarefa() {
 
-
+document.getElementById('btn-salvar-tarefa').addEventListener('click', async function addTarefa() {
+    
     const nome = document.getElementById('nomeTarefa').value;
     const numero = document.getElementById('numeroTarefa').value;
     const descricao = document.getElementById('descricaoTarefa').value;
-
-    console.log("Tarefa criada:", { nome, numero, descricao });
+    
     
     modalTarefa.style.display = "none";
-    formTarefa.reset();
 });
 
 
