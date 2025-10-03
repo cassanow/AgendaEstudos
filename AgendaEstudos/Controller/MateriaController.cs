@@ -21,9 +21,11 @@ public class MateriaController : Microsoft.AspNetCore.Mvc.Controller
         _materiaRepository = materiaRepository;
     }
   
-    [HttpGet("GetAllMaterias/{userId:int}")]
-    public async Task<IActionResult> GetAll(int userId)
+    [HttpGet("GetMaterias")]
+    public async Task<IActionResult> GetAll()
     {
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        
         var materias = await _materiaRepository.GetAllMaterias(userId);
         
         if(!materias.Any())

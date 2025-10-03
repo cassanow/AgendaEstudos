@@ -43,10 +43,10 @@ formTarefa.addEventListener('submit', async function addTarefa() {
 });
 
 
-const modalMateria = document.getElementById('modalMateria');
-const btnNovaMateria = document.getElementById('btn-add-materia');
-const closeModalMateria = document.getElementById('closeModalMateria');
 
+const modalMateria = document.getElementById('modal-materia');
+const btnNovaMateria = document.getElementById('btn-add-materia');
+const closeModalMateria = document.getElementById('close-materia');
 btnNovaMateria.addEventListener('click', () => {
     modalMateria.style.display = "block";
 });
@@ -63,8 +63,8 @@ window.addEventListener('click', (event) => {
 document.getElementById('btn-salvar').addEventListener('click', async function addMateria() {
     try{
         const token = localStorage.getItem('token');
-        const nome = document.getElementById('nomeMateria').value;
-        const prioridade = parseInt(document.getElementById('prioridadeMateria').value);
+        const nome = document.getElementById('nome-materia').value;
+        const prioridade = parseInt(document.getElementById('prioridade-materia').value);
         const response = await fetch("https://localhost:7118/Materia/AddMateria", {
             method: "POST",
             headers: {'Content-Type': 'application/json','Authorization': `Bearer ${token}`},
@@ -82,5 +82,36 @@ document.getElementById('btn-salvar').addEventListener('click', async function a
     }
     
 });
+
+
+async function getAllMaterias(){
+    try{
+        const materias = document.getElementById('loading-materia');
+        const token = localStorage.getItem('token');
+        const response = await fetch("https://localhost:7118/Materia/GetMaterias", {
+            method: "GET",
+            headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
+        })
+        
+        if(!response.ok) {
+            console.log("deu ruim");
+        }
+        else{
+            const data = await response.json();
+            console.log(data);
+            let html = "<ul>";
+            data.forEach(element => {
+                html += `<li>${element.nome}</li>`;
+            })
+            html += `</ul>`
+            materias.innerHTML = html;
+            
+        }
+    }catch(err){
+        console.log(err);
+    }
+}
+
+getAllMaterias();
 
 

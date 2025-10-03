@@ -17,12 +17,6 @@
         <a href="#" class="menu-item active" id="menu-dashboard">
             <span>Dashboard</span>
         </a>
-        <a href="#" class="menu-item" id="menu-tarefas">
-            <span>Tarefas</span>
-        </a>
-        <a href="#" class="menu-item" id="menu-materias">
-            <span>Matérias</span>
-        </a>
         <a href="#" class="menu-item" id="menu-perfil">
             <span>Perfil</span>
         </a>
@@ -40,7 +34,7 @@
         <!-- Stats Cards -->
         <div class="stats-grid">
             <div class="stat-card">
-                <h3>Total de Tarefas</h3>
+                <h3>Tarefas</h3>
                 <p class="stat-number" id="total-tarefas">0</p>
             </div>
             <div class="stat-card">
@@ -56,7 +50,6 @@
                 <p class="stat-number" id="tarefas-semana">0</p>
             </div>
         </div>
-
         
         <section class="section">
             <div class="section-header">
@@ -64,132 +57,64 @@
                 <button class="btn-primary" id="btn-add-materia">+ Nova Matéria</button>
             </div>
             <div id="materias-container" class="materias-grid">
-                <div class="loading">Carregando matérias...</div>
+                <div class="loading" id="loading-materia">Carregando matérias...</div>
             </div>
         </section>
 
-        <div id="modalMateria" class="modal" style="display:none;">
-            <div class="modal-content">
-                <span id="closeModalMateria" class="close">&times;</span>
-                <h2>Nova Matéria</h2>
-                <br>
-                <label for="nomeMateria">Nome da Matéria:</label><br>
-                <input type="text" id="nomeMateria" placeholder="Digite o nome" required /><br>
-                <label for="prioridadeMateria">Prioridade:</label><br>
-                    <select id="prioridadeMateria" required>
-                        <option value="">Selecione</option>
-                        <option value="0">Alta</option>
-                        <option value="1">Média</option>
-                        <option value="2">Baixa</option>
-                    </select>
-                    <button id="btn-salvar">Salvar</button>
-            </div>
-        </div>
-        <div id="modalTarefa" class="modal" style="display:none;">
-            <div class="modal-content">
-                <span id="closeModal" class="close">&times;</span>
-                <h2>Nova Tarefa</h2>
-                <form id="formTarefa">
-                    <label for="nomeTarefa">Nome da Tarefa:</label>
-                    <input type="text" id="nomeTarefa" placeholder="Digite o nome" required />
-
-                    <label for="numeroTarefa">Número (0, 1 ou 2):</label>
-                    <select id="numeroTarefa" required>
-                        <option value="">--Selecione--</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
-
-                    <label for="descricaoTarefa">Descrição:</label>
-                    <textarea id="descricaoTarefa" placeholder="Descrição da tarefa" required></textarea>
-
-                    <button type="submit">Salvar</button>
-                </form>
-            </div>
-        </div>
         <section class="section">
             <div class="section-header">
                 <h2>Minhas Tarefas</h2>
                 <button class="btn-primary" id="btn-add-tarefa">+ Nova Tarefa</button>
             </div>
-
             
-            <div class="filters">
-                <select id="filter-prioridade">
-                    <option value="">Todas as prioridades</option>
-                    <option value="1">Alta</option>
-                    <option value="2">Média</option>
-                    <option value="3">Baixa</option>
-                </select>
-                <select id="filter-materia">
-                    <option value="">Todas as matérias</option>
-                </select>
-            </div>
-
             <div id="tarefas-container" class="tarefas-list">
                 <div class="loading">Carregando tarefas...</div>
             </div>
         </section>
     </div>
-</main>
-
-
-<div id="modal-materia" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Nova Matéria</h2>
-        <form id="form-materia">
-            <input type="text" id="materia-nome" placeholder="Nome da Matéria" required>
-            <div class="color-input">
-                <label>Cor da Matéria:</label>
-                <input type="color" id="materia-cor" value="#3498db">
-            </div>
-            <button type="submit" class="btn-primary">Salvar</button>
-        </form>
-    </div>
-</div>
-
-
-<div id="modal-tarefa" class="modal">
-    <div class="modal-content">
-        <span class="close" id="close-tarefa">&times;</span>
-        <h2 id="modal-tarefa-title">Nova Tarefa</h2>
-        <form id="form-tarefa">
-            <input type="hidden" id="tarefa-id">
-
-            <input type="text" id="tarefa-titulo" placeholder="Título da Tarefa" required>
-
-            <textarea id="tarefa-descricao" placeholder="Descrição (opcional)" rows="4"></textarea>
-
-            <div class="form-group">
-                <label>Data e Hora de Início:</label>
-                <input type="datetime-local" id="tarefa-data-inicio" required>
-            </div>
-
-            <div class="form-group">
-                <label>Data e Hora de Término:</label>
-                <input type="datetime-local" id="tarefa-data-fim" required>
-            </div>
-
-            <select id="tarefa-prioridade" required>
-                <option value="">Selecione a prioridade</option>
-                <option value="1">Alta</option>
-                <option value="2">Média</option>
-                <option value="3">Baixa</option>
+    
+    <div id="modal-materia" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span id="close-materia" class="close">&times;</span>
+            <h2>Nova Matéria</h2>
+            <br>
+            <label for="nome-materia">Nome da Matéria:</label><br>
+            <input type="text" id="nome-materia" placeholder="Digite o nome" required /><br>
+            <label for="prioridade-materia">Prioridade:</label><br>
+            <select id="prioridade-materia" required>
+                <option value="">Selecione</option>
+                <option value="0">Alta</option>
+                <option value="1">Média</option>
+                <option value="2">Baixa</option>
             </select>
-
-            <div class="form-group">
-                <label>Matérias:</label>
-                <select id="tarefa-materias" multiple required>
-                </select>
-                <small>💡 Segure Ctrl (Windows) ou Cmd (Mac) para selecionar múltiplas matérias</small>
-            </div>
-
-            <button type="submit" class="btn-primary">Salvar Tarefa</button>
-        </form>
+            <button id="btn-salvar">Salvar</button>
+        </div>
     </div>
-</div>
+    
+    <div id="modal-tarefa" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Nova Tarefa</h2>
+            <form id="formTarefa">
+                <label for="nomeTarefa">Nome da Tarefa:</label>
+                <input type="text" id="nomeTarefa" placeholder="Digite o nome" required />
+
+                <label for="numeroTarefa">Número (0, 1 ou 2):</label>
+                <select id="numeroTarefa" required>
+                    <option value="">--Selecione--</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+
+                <label for="descricaoTarefa">Descrição:</label>
+                <textarea id="descricaoTarefa" placeholder="Descrição da tarefa" required></textarea>
+
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+    </div>
+</main>
 
 <script src="js/dashboard.js"></script>
 </body>
