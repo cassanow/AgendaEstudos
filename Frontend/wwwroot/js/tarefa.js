@@ -9,16 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentPage = window.location.pathname.split("/").pop();
 
     menuItems.forEach(item => {
-        // Remove a classe ativa de todos
         item.classList.remove("active");
-
-        // Compara o href com o nome do arquivo atual
+        
         const href = item.getAttribute("href");
         if (href === currentPage) {
             item.classList.add("active");
         }
-
-        // Também adiciona evento de clique para destacar enquanto navega
+        
         item.addEventListener("click", () => {
             menuItems.forEach(i => i.classList.remove("active"));
             item.classList.add("active");
@@ -105,6 +102,36 @@ document.getElementById('btn-salvar').addEventListener('click', async function a
     }
 });
 
+document.addEventListener('click', async function deleteMateria(e) {
+    if(e.target.classList.contains('btn-delete')) {
+        const token = localStorage.getItem('token');
+        const id = e.target.getAttribute('data-id');
+
+        if(!confirm("Are you sure?")){
+            return;
+        }
+        try{
+            const response = await fetch(`https://localhost:7118/api/Tarefa/DeleteTarefa/${id}`, {
+                method: "DELETE",
+                headers: {'Content-Type': 'application/json','Authorization': `Bearer ${token}`},
+            })
+
+            if(!response.ok) {
+                console.log(response);
+                return;
+            }
+
+            console.log("deletado com sucesso")
+            ListaTarefas();
+        }catch(err){
+            console.log(err);
+        }
+
+    }
+
+})
+
+
 
 async function getAllTarefas(){
     try{
@@ -134,7 +161,7 @@ async function ListaTarefas(){
 
     let html = "<ul>";
     tarefas.forEach(t => {
-        html += `<li>${t.titulo}</li>`;
+        html += `<li>${t.titulo}<button class="btn-delete" data-id="${t.id}">Deletar</button></li>`;
     });
     html += "</ul>";
 

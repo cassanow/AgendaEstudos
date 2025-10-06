@@ -227,6 +227,8 @@ body {
 }
 
 .tarefas-grid ul li {
+    display: flex;
+    justify-content: space-between;
     list-style: none;
     font-size: 18px;
     background: #fff;
@@ -240,6 +242,19 @@ body {
 
 .tarefas-grid ul li:hover {
     transform: translateX(3px);
+}
+
+.tarefas-grid button{
+    background-color: darkred;
+    color: white;
+    border: none;
+    padding: 3px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.tarefas-grid button:hover {
+    background-color: indianred;
 }
 
 .modal {

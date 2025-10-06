@@ -10,16 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentPage = window.location.pathname.split("/").pop();
 
     menuItems.forEach(item => {
-        // Remove a classe ativa de todos
         item.classList.remove("active");
-
-        // Compara o href com o nome do arquivo atual
+        
         const href = item.getAttribute("href");
         if (href === currentPage) {
             item.classList.add("active");
         }
-
-        // Também adiciona evento de clique para destacar enquanto navega
+        
         item.addEventListener("click", () => {
             menuItems.forEach(i => i.classList.remove("active"));
             item.classList.add("active");
@@ -27,27 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-async function getAllMaterias(){
-    try{
-        const token = localStorage.getItem('token');
-        const response = await fetch("https://localhost:7118/Materia/GetMaterias", {
-            method: "GET",
-            headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
-        })
-
-        if(!response.ok) {
-            console.log("deu ruim");
-            return [];
-        }
-        else{
-            return await response.json();
-        }
-    }catch(err){
-        console.log(err);
-        return [];
-    }
-
-}
 
 const modalMateria = document.getElementById('modal-materia');
 const btnNovaMateria = document.getElementById('btn-add-materia');
@@ -90,13 +66,66 @@ document.getElementById('btn-salvar').addEventListener('click', async function a
 
 });
 
+
+document.addEventListener('click', async function deleteMateria(e) {
+    if(e.target.classList.contains('btn-delete')) {
+        const token = localStorage.getItem('token');
+        const id = e.target.getAttribute('data-id');
+        
+        if(!confirm("Are you sure?")){
+            return;
+        }
+        try{
+            const response = await fetch(`https://localhost:7118/Materia/DeleteMateria/${id}`, {
+                method: "DELETE",
+                headers: {'Content-Type': 'application/json','Authorization': `Bearer ${token}`},
+            })
+
+            if(!response.ok) {
+                console.log(response);
+                return;
+            }
+
+            console.log("deletado com sucesso")
+            ListaMaterias();
+        }catch(err){
+            console.log(err);
+        }
+        
+    }
+    
+})
+
+async function getAllMaterias(){
+    try{
+        const token = localStorage.getItem('token');
+        const response = await fetch("https://localhost:7118/Materia/GetMaterias", {
+            method: "GET",
+            headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
+        })
+
+        if(!response.ok) {
+            console.log("deu ruim");
+            return [];
+        }
+        else{
+            return await response.json();
+        }
+    }catch(err){
+        console.log(err);
+        return [];
+    }
+
+}
+
+
 async function ListaMaterias() {
     const materiasContainer = document.getElementById('materias-container');
     const materias = await getAllMaterias();
 
     let html = "<ul>";
     materias.forEach(m => {
-        html += `<li>${m.nome}</li>`;
+        html += `<li>${m.nome}<button class="btn-delete" data-id="${m.id}">Deletar</button></li>`;
     });
     html += "</ul>";
 

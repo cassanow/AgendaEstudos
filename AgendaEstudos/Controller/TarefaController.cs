@@ -80,7 +80,7 @@ public class TarefaController : Microsoft.AspNetCore.Mvc.Controller
         return Ok(dto);
     }
 
-    [HttpDelete("DeleteTarefas{id:int}")]
+    [HttpDelete("DeleteTarefa/{id:int}")]
     public async Task<IActionResult> DeleteTarefas(int id)
     {
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
