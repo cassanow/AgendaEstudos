@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Materia</title>
+    <link rel="stylesheet" href="css/materia.css">
+</head>
+<body>
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <h1 class="logo">Agenda</h1>
+    </div>
+
+    <div class="user-area" id="user-area">
+
+    </div>
+
+    <nav class="sidebar-menu">
+        <a href="Dashboard.html" class="menu-item active" id="menu-dashboard">
+            <span>Home</span>
+        </a>
+        <a href="#" class="menu-item" id="menu-perfil">
+            <span>Perfil</span>
+        </a>
+        <a href="Materia.html" class="menu-item" id="menu-materia">
+            <span>Materia</span>
+        </a>
+        <a href="#" class="menu-item" id="menu-tarefa">
+            <span>Tarefa</span>
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <button id="btn-logout" class="btn-logout">Sair</button>
+    </div>
+</aside>
+
+<main class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <h2>Matérias</h2>
+            <button class="btn-primary" id="btn-add-materia">Nova Matéria</button>
+        </div>
+        <div id="materias-container" class="materias-grid">
+            <div id="loading-materia">Carregando matérias...</div>
+        </div>
+    </section>
+    
+    <div id="modal-materia" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span id="close-materia" class="close">&times;</span>
+            <h2>Nova Matéria</h2>
+            <br>
+            <label for="nome-materia">Nome da Matéria:</label><br>
+            <input type="text" id="nome-materia" placeholder="Digite o nome" required /><br>
+            <label for="prioridade-materia">Prioridade:</label><br>
+            <select id="prioridade-materia" required>
+                <option value="">Selecione</option>
+                <option value="0">Alta</option>
+                <option value="1">Média</option>
+                <option value="2">Baixa</option>
+            </select>
+            <button id="btn-salvar">Salvar</button>
+        </div>
+    </div>
+</main>
+
+<script src="js/materia.js"></script>
+</body>
+</html>

@@ -11,7 +11,7 @@ function user(){
     const userArea = document.getElementById("user-area");
     const name = localStorage.getItem('user')
     
-    userArea.innerHTML = 'Bem vindo ' + name;
+    userArea.innerHTML = name;
 }
 
 
@@ -72,68 +72,6 @@ document.getElementById('btn-salvar-tarefa').addEventListener('click', async fun
 
 
 
-const modalMateria = document.getElementById('modal-materia');
-const btnNovaMateria = document.getElementById('btn-add-materia');
-const closeModalMateria = document.getElementById('close-materia');
-btnNovaMateria.addEventListener('click', () => {
-    modalMateria.style.display = "block";
-});
-
-closeModalMateria.addEventListener('click', () => {
-    modalMateria.style.display = "none";
-});
-
-window.addEventListener('click', (event) => {
-    if (event.target === modalMateria) {
-        modalMateria.style.display = "none";
-    }
-});
-document.getElementById('btn-salvar').addEventListener('click', async function addMateria() {
-    try{
-        const token = localStorage.getItem('token');
-        const nome = document.getElementById('nome-materia').value;
-        const prioridade = parseInt(document.getElementById('prioridade-materia').value);
-        const response = await fetch("https://localhost:7118/Materia/AddMateria", {
-            method: "POST",
-            headers: {'Content-Type': 'application/json','Authorization': `Bearer ${token}`},
-            body: JSON.stringify({nome, prioridade}),
-        })
-        if(!response.ok) {
-            console.log(response);
-        }
-        
-        const data = await response.json();
-        console.log(data);
-    }
-    catch(err){
-        console.log(err);
-    }
-    
-});
-
-
-async function getAllMaterias(){
-    try{
-        const token = localStorage.getItem('token');
-        const response = await fetch("https://localhost:7118/Materia/GetMaterias", {
-            method: "GET",
-            headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
-        })
-        
-        if(!response.ok) {
-            console.log("deu ruim");
-            return [];
-        }
-        else{
-            return await response.json();
-        }
-    }catch(err){
-        console.log(err);
-        return [];
-    }
-    
-}
-
 async function getAllTarefas(){
     try{
         const token = localStorage.getItem('token');
@@ -156,19 +94,6 @@ async function getAllTarefas(){
     }
 }
 
-async function ListaMaterias() {
-    const materiasContainer = document.getElementById('materias-container');
-    const materias = await getAllMaterias();
-
-    let html = "<ul>";
-    materias.forEach(m => {
-        html += `<li>${m.nome}</li>`;
-    });
-    html += "</ul>";
-
-    materiasContainer.innerHTML = html;
-}
-
 async function ListaTarefas(){
     const tarefasContainer = document.getElementById('tarefas-container');
     const tarefas = await getAllTarefas();
@@ -182,7 +107,6 @@ async function ListaTarefas(){
     tarefasContainer.innerHTML = html;
 }
 
-ListaMaterias();
 ListaTarefas();
 getAllMaterias();
 user();
