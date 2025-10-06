@@ -10,7 +10,7 @@ namespace AgendaEstudos.Controller;
 
 [Authorize]
 [ApiController]
-[Route("[controller]")]     
+[Route("api/[controller]")]     
 public class MateriaController : Microsoft.AspNetCore.Mvc.Controller
 {
     private readonly IMateriaRepository _materiaRepository;

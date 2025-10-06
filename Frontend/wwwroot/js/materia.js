@@ -46,7 +46,7 @@ document.getElementById('btn-salvar').addEventListener('click', async function a
         const token = localStorage.getItem('token');
         const nome = document.getElementById('nome-materia').value;
         const prioridade = parseInt(document.getElementById('prioridade-materia').value);
-        const response = await fetch("https://localhost:7118/Materia/AddMateria", {
+        const response = await fetch("https://localhost:7118/api/Materia/AddMateria", {
             method: "POST",
             headers: {'Content-Type': 'application/json','Authorization': `Bearer ${token}`},
             body: JSON.stringify({nome, prioridade}),
@@ -76,7 +76,7 @@ document.addEventListener('click', async function deleteMateria(e) {
             return;
         }
         try{
-            const response = await fetch(`https://localhost:7118/Materia/DeleteMateria/${id}`, {
+            const response = await fetch(`https://localhost:7118/api/Materia/DeleteMateria/${id}`, {
                 method: "DELETE",
                 headers: {'Content-Type': 'application/json','Authorization': `Bearer ${token}`},
             })
@@ -99,7 +99,7 @@ document.addEventListener('click', async function deleteMateria(e) {
 async function getAllMaterias(){
     try{
         const token = localStorage.getItem('token');
-        const response = await fetch("https://localhost:7118/Materia/GetMaterias", {
+        const response = await fetch("https://localhost:7118/api/Materia/GetMaterias", {
             method: "GET",
             headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
         })
