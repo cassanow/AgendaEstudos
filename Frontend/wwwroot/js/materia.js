@@ -5,6 +5,28 @@
     userArea.innerHTML = name;
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const menuItems = document.querySelectorAll(".menu-item");
+    const currentPage = window.location.pathname.split("/").pop();
+
+    menuItems.forEach(item => {
+        // Remove a classe ativa de todos
+        item.classList.remove("active");
+
+        // Compara o href com o nome do arquivo atual
+        const href = item.getAttribute("href");
+        if (href === currentPage) {
+            item.classList.add("active");
+        }
+
+        // Também adiciona evento de clique para destacar enquanto navega
+        item.addEventListener("click", () => {
+            menuItems.forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+        });
+    });
+});
+
 async function getAllMaterias(){
     try{
         const token = localStorage.getItem('token');
