@@ -113,7 +113,6 @@ async function getAllMaterias(){
 
 }
 
-
 async function ListaMaterias() {
     const materiasContainer = document.getElementById('materias-container');
     const materias = await getAllMaterias();
