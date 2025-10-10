@@ -1,9 +1,4 @@
-﻿function user(){
-    const userArea = document.getElementById("user-area");
-    const name = localStorage.getItem('user')
-
-    userArea.innerHTML = name;
-}
+﻿
 
 document.addEventListener("DOMContentLoaded", () => {
     const menuItems = document.querySelectorAll(".menu-item");
@@ -135,4 +130,3 @@ async function ListaMaterias() {
 
 getAllMaterias();
 ListaMaterias();
-user();

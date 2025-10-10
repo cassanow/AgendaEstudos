@@ -1,9 +1,4 @@
-﻿function user(){
-    const userArea = document.getElementById("user-area");
-    const name = localStorage.getItem('user')
-
-    userArea.innerHTML = name;
-}
+﻿
 document.addEventListener("DOMContentLoaded", () => {
     const menuItems = document.querySelectorAll(".menu-item");
     const currentPage = window.location.pathname.split("/").pop();
@@ -170,4 +165,3 @@ async function ListaTarefas(){
 
 ListaTarefas();
 getAllMaterias();
-user();

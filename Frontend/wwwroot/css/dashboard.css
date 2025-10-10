@@ -26,15 +26,6 @@ body {
 }
 
 
-.user-area{
-    font-size: 17px;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 15px;
-    font-weight: bold;
-    text-shadow: 0 0 5px black;
-}
-
 .sidebar-header {
     padding: 2rem 1.5rem;
     background-color: dodgerblue;
