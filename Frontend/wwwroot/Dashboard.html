@@ -13,10 +13,6 @@
         <h1 class="logo">Agenda</h1>
     </div>
     
-    <div class="user-area" id="user-area">
-        
-    </div>
-
     <nav class="sidebar-menu">
         <a href="Dashboard.html" class="menu-item" id="menu-dashboard">Home</a>
         <a href="#" class="menu-item" id="menu-perfil">Perfil</a>
@@ -31,80 +27,24 @@
 
 
 <main class="main-content">
+        <div class="user-area" id="user-area"></div>
     
-        <section class="section">
-            <div class="section-header">
-                <h2>Minhas Matérias</h2>
-                <button class="btn-primary" id="btn-add-materia">+ Nova Matéria</button>
+        <section class="streak">
+            <h2>Sequência</h2>
+    
+            <div class="sequencia">
+                <h2>12</h2>
+                <p>Dias consecutivos</p>
             </div>
+        </section>
+    
+        <section class="section-materias-destaque">
+            <h2>Matérias em destaque</h2>
             <div id="materias-container" class="materias-grid">
-                <div class="loading" id="loading-materia">Carregando matérias...</div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="section-header">
-                <h2>Minhas Tarefas</h2>
-                <button class="btn-primary" id="btn-add-tarefa">+ Nova Tarefa</button>
-            </div>
-            
-            <div id="tarefas-container" class="tarefas-list">
-                <div class="loading">Carregando tarefas...</div>
-            </div>
-        </section>
-    
-    <div id="modal-materia" class="modal" style="display:none;">
-        <div class="modal-content-materia">
-            <span id="close-materia" class="close">&times;</span>
-            <h2>Nova Matéria</h2>
-            <br>
-            <label for="nome-materia">Nome da Matéria:</label><br>
-            <input type="text" id="nome-materia" placeholder="Digite o nome" required /><br>
-            <label for="prioridade-materia">Prioridade:</label><br>
-            <select id="prioridade-materia" required>
-                <option value="">Selecione</option>
-                <option value="0">Alta</option>
-                <option value="1">Média</option>
-                <option value="2">Baixa</option>
-            </select>
-            <button id="btn-salvar">Salvar</button>
-        </div>
-    </div>
-    
-    <div id="modal-tarefa" class="modal" style="display:none;">
-        <div class="modal-content-tarefa">
-            <span id="close-tarefa" class="close">&times;</span>
-            <h2>Nova Tarefa</h2>
-            <br>
-            <label for="nome-tarefa">Nome</label><br>
-            <input type="text" id="nome-tarefa" placeholder="Digite o nome" required />
-            
-            <label for="descricao-tarefa">Descrição</label><br><br>
-            <textarea id="descricao-tarefa" placeholder="Descrição da tarefa" required></textarea><br>
-
-            <label for="prioridade-tarefa">Prioridade</label><br>
-            <select id="prioridade-tarefa" required>
-                <option value="">Selecione</option>
-                <option value="0">Alta</option>
-                <option value="1">Média</option>
-                <option value="2">Baixa</option>
-            </select>
-            
-            <label for="materia-select">Matéria</label>
-            <select id="materia-select">
-                <option value="">Selecione</option>
                 
-            </select>
-
-            <label for="tarefa-data-inicio">Data Inicio</label><br>
-            <input type="date" id="tarefa-data-inicio" placeholder="Digite o nome" required />
-
-            <label for="tarefa-data-fim">Data Fim</label><br>
-            <input type="date" id="tarefa-data-fim" placeholder="Digite o nome" required />
-            
-            <button id="btn-salvar-tarefa">Salvar</button>
-        </div>
-    </div>
+            </div>
+        </section>
+    
 </main>
 
 <script src="js/dashboard.js"></script>

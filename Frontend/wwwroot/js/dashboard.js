@@ -29,7 +29,7 @@ function user(){
     const userArea = document.getElementById("user-area");
     const name = localStorage.getItem('user')
     
-    userArea.innerHTML = name;
+    userArea.innerHTML = "Bem vindo, " + name + "!";
 }
 
 user();
