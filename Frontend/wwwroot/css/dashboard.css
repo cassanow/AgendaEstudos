@@ -104,17 +104,10 @@ body {
 
 .user-area{
     font-size: 30px;
-    margin: 15px;
+    margin-bottom: 30px;
     font-weight: bold;
 }
 
-.section-materias-destaque {
-    background-color: white;
-    padding: 3rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    margin-bottom: 3rem;
-}
 
 .streak{
     background-color: dodgerblue;
@@ -137,6 +130,24 @@ body {
 .sequencia p{
     font-size: 20px;
 }
+
+.section-materias-destaque {
+    background-color: white;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 3rem;
+}
+
+.materias-grid div{
+   margin-top: 2rem;
+    border-radius: 8px;
+    padding: 0.4rem;
+}
+.materias-grid div:hover{
+    background-color: rgba(214, 214, 214, 0.26);
+}
+
 
 
 

@@ -58,7 +58,11 @@ async function getAllMaterias(){
             
             top3.forEach(m => {
                 const qtd = Array.isArray(m.tarefas) ? m.tarefas.length : 0;
-                container.innerHTML += `<ul>${m.nome}<br> ${qtd} tarefas pendentes</ul>`;
+                container.innerHTML += `<div>
+                <h3>${m.nome}<br></h3>
+                <p>${qtd} tarefas pendentes</p>
+                </div>
+                `;
             })
             
         }
