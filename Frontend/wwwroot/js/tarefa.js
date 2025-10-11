@@ -156,7 +156,15 @@ async function ListaTarefas(){
 
     let html = "<ul>";
     tarefas.forEach(t => {
-        html += `<li>${t.titulo}<button class="btn-delete" data-id="${t.id}">Deletar</button></li>`;
+        html += `
+        <li>
+            ${t.titulo}
+            <div class="botoes">
+                <button class="btn-edit" data-id="${t.id}">Editar</button>
+                <button class="btn-delete" data-id="${t.id}">Deletar</button>
+            </div>
+        </li>
+    `;
     });
     html += "</ul>";
 

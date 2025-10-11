@@ -119,10 +119,17 @@ async function ListaMaterias() {
 
     let html = "<ul>";
     materias.forEach(m => {
-        html += `<li>${m.nome}<button class="btn-delete" data-id="${m.id}">Deletar</button></li>`;
+        html += `
+        <li>
+            ${m.nome}
+            <div class="botoes">
+                <button class="btn-edit" data-id="${m.id}">Editar</button>
+                <button class="btn-delete" data-id="${m.id}">Deletar</button>
+            </div>
+        </li>
+    `;
     });
     html += "</ul>";
-
     materiasContainer.innerHTML = html;
 }
 

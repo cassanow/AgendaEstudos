@@ -198,21 +198,6 @@ body {
     box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
 }
 
-.btn-edit {
-    background: #95a5a6;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-size: 0.9rem;
-}
-
-.btn-edit:hover {
-    background: #7f8c8d;
-    transform: scale(1.05);
-}
 .tarefas-grid ul {
     padding: 0;
     margin-top: 20px;
@@ -236,7 +221,7 @@ body {
     transform: translateX(3px);
 }
 
-.tarefas-grid button{
+.btn-delete{
     background-color: darkred;
     color: white;
     border: none;
@@ -245,8 +230,20 @@ body {
     cursor: pointer;
 }
 
-.tarefas-grid button:hover {
+.btn-delete:hover {
     background-color: indianred;
+}
+
+.btn-edit{
+    background-color: darkorange;
+    color: white;
+    border: none;
+    padding: 3px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.btn-edit:hover {
+    background-color: #ffb36a;
 }
 
 .modal {
