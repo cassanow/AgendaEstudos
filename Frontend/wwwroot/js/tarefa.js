@@ -55,8 +55,8 @@ btnNovaTarefa.addEventListener('click', async () => {
         option.textContent = m.nome;
         materiaSelect.appendChild(option);
     });
-
     modalTarefa.style.display = "block";
+    document.getElementById("modal-titulo").textContent = "Nova Tarefa";
 });
 
 closeModal.addEventListener('click', () => {
@@ -68,6 +68,7 @@ window.addEventListener('click', (event) => {
         modalTarefa.style.display = "none";
     }
 });
+
 
 document.getElementById('btn-salvar').addEventListener('click', async function addTarefa() {
     try{
@@ -96,6 +97,34 @@ document.getElementById('btn-salvar').addEventListener('click', async function a
         console.log(err);
     }
 });
+
+document.addEventListener("click", async function (e) {
+    if(e.target.classList.contains("btn-edit")){
+        const token = localStorage.getItem('token');
+        const id = e.target.getAttribute("data-id");
+        modalTarefa.style.display = "block";
+        document.getElementById("modal-titulo").textContent = "Editar Tarefa";
+        
+        const titulo = document.getElementById('nome-tarefa').value;
+        const descricao = document.getElementById('descricao-tarefa').value;
+        const prioridade = parseInt(document.getElementById('prioridade-tarefa').value);
+        const dataInicio = document.getElementById('tarefa-data-inicio').value;
+        const dataFim = document.getElementById('tarefa-data-fim').value;
+        
+        try{
+            const response = await fetch(`https://localhost:7118/api/Tarefa/UpdateTarefa/${id}`, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
+                body: JSON.stringify({}),
+            })
+
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
+})
 
 document.addEventListener('click', async function deleteMateria(e) {
     if(e.target.classList.contains('btn-delete')) {
