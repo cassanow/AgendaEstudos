@@ -53,13 +53,13 @@ body {
 }
 
 .menu-item:hover {
-    background-color: lightskyblue;
+    background-color: rgb(38, 96, 152);
     color: white;
     border-left-color: #3498db;
 }
 
 .menu-item.active {
-    background-color: lightskyblue;
+    background-color: rgb(38, 96, 152);
     color: white;
     border-left-color: #3498db;
 }
@@ -79,7 +79,7 @@ body {
 
 .btn-logout {
     width: 100%;
-    background-color: lightskyblue;
+    background-color: rgb(38, 96, 152);
     color: white;
     border: none;
     padding: 0.8rem;
@@ -91,7 +91,7 @@ body {
 }
 
 .btn-logout:hover {
-    background-color: lightskyblue;
+    background-color: rgb(38, 96, 152);
     transform: translateY(-5px);
 }
 
