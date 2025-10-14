@@ -32,6 +32,21 @@ public class TarefaController : Microsoft.AspNetCore.Mvc.Controller
         return Ok(tarefas); 
     }
 
+    [HttpGet("GetTarefa/{id}")]
+    public async Task<IActionResult> GetTarefa(int id)
+    {
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var tarefa = await _tarefaRepository.GetTarefa(id);
+        
+        if (tarefa == null)
+            return NotFound();
+        
+        if (tarefa.UserId != userId)
+            return Unauthorized();
+        
+        return Ok(tarefa);
+    }
+
     [HttpPost("AddTarefas")]
     public async Task<IActionResult> AddTarefas(int materiaId, TarefaDTO dto)
     {
