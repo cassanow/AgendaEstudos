@@ -5,4 +5,6 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
+app.MapGet("/", () => Results.Redirect("/Login.html"));  
+
 app.Run();

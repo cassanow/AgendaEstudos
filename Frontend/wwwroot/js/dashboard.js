@@ -1,10 +1,4 @@
 ﻿
-document.getElementById("btn-logout").addEventListener("click", function() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userEmail');
-    window.location.href = "/Login.html";
-})
-
 document.addEventListener("DOMContentLoaded", () => {
     const menuItems = document.querySelectorAll(".menu-item");
     const currentPage = window.location.pathname.split("/").pop();

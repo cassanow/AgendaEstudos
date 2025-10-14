@@ -1,5 +1,4 @@
 ﻿
-
 document.addEventListener("DOMContentLoaded", () => {
     const menuItems = document.querySelectorAll(".menu-item");
     const currentPage = window.location.pathname.split("/").pop();
