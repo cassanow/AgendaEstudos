@@ -28,21 +28,10 @@ public class MateriaController : Microsoft.AspNetCore.Mvc.Controller
         
         var materias = await _materiaRepository.GetAllMaterias(userId);
         
+        if(!materias.Any())
+            return NoContent();
         
         return Ok(materias);    
-    }
-
-    [HttpGet("GetMateria/{id}")]
-    public async Task<IActionResult> GetMateria(int id)
-    {
-        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-        var materia = await _materiaRepository.GetMateria(id);
-        
-        if(materia.UserId != userId)
-            return Unauthorized();
-        
-        return Ok(materia);
     }
 
 

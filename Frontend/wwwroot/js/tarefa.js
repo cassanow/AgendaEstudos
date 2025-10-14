@@ -1,4 +1,6 @@
-﻿
+﻿let modoEdicao = false;
+let idTarefa = null;
+
 document.addEventListener("DOMContentLoaded", () => {
     const menuItems = document.querySelectorAll(".menu-item");
     const currentPage = window.location.pathname.split("/").pop();
@@ -22,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function getAllMaterias(){
     try{
         const token = localStorage.getItem('token');
-        const response = await fetch("https://localhost:7118/Materia/GetMaterias", {
+        const response = await fetch("https://localhost:7118/api/Materia/GetMaterias", {
             method: "GET",
             headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
         })
@@ -72,15 +74,30 @@ window.addEventListener('click', (event) => {
 
 document.getElementById('btn-salvar').addEventListener('click', async function addTarefa() {
     try{
+        const url = modoEdicao
+            ? `https://localhost:7118/api/Tarefa/UpdateTarefa/${idTarefa}`
+            : `https://localhost:7118/api/Tarefa/AddTarefas`;
+        
+        const metodo = modoEdicao ? 'PUT' : 'POST';
+        
         const token = localStorage.getItem('token');
         const titulo = document.getElementById('nome-tarefa').value;
         const descricao = document.getElementById('descricao-tarefa').value;
         const prioridade = parseInt(document.getElementById('prioridade-tarefa').value);
-        const dataInicio = document.getElementById('tarefa-data-inicio').value;
-        const dataFim = document.getElementById('tarefa-data-fim').value;
+        let dataInicio = document.getElementById('tarefa-data-inicio').value;
+        let dataFim = document.getElementById('tarefa-data-fim').value;
         const materiaId = document.getElementById('materia-select').value;
-        const response = await fetch(`https://localhost:7118/api/Tarefa/AddTarefas?materiaId=${materiaId}`, {
-            method: 'POST',
+
+        if (!dataInicio.includes('T')) {
+            dataInicio = dataInicio + 'T00:00:00';
+        }
+        if (!dataFim.includes('T')) {
+            dataFim = dataFim + 'T00:00:00';
+        }
+        
+        
+        const response = await fetch(url, {
+            method: metodo,
             headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
             body: JSON.stringify({titulo, descricao, prioridade, dataInicio, dataFim})
         });
@@ -100,30 +117,37 @@ document.getElementById('btn-salvar').addEventListener('click', async function a
 
 document.addEventListener("click", async function (e) {
     if(e.target.classList.contains("btn-edit")){
+        modoEdicao = true;
+        idTarefa = e.target.getAttribute("data-id");
         const token = localStorage.getItem('token');
-        const id = e.target.getAttribute("data-id");
         modalTarefa.style.display = "block";
         document.getElementById("modal-titulo").textContent = "Editar Tarefa";
+
+        const materias = await getAllMaterias();
+        const materiaSelect = document.getElementById('materia-select');
+        materiaSelect.innerHTML = "";
+
+        materias.forEach(m => {
+            const option = document.createElement("option");
+            option.value = m.id;
+            option.textContent = m.nome;
+            materiaSelect.appendChild(option);
+        });
         
-        const titulo = document.getElementById('nome-tarefa').value;
-        const descricao = document.getElementById('descricao-tarefa').value;
-        const prioridade = parseInt(document.getElementById('prioridade-tarefa').value);
-        const dataInicio = document.getElementById('tarefa-data-inicio').value;
-        const dataFim = document.getElementById('tarefa-data-fim').value;
-        
-        try{
-            const response = await fetch(`https://localhost:7118/api/Tarefa/UpdateTarefa/${id}`, {
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
-                body: JSON.stringify({}),
+        const response = await fetch(`https://localhost:7118/api/Tarefa/GetTarefa/${idTarefa}`, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
             })
-
-        }
-        catch(err){
-            console.log(err);
-        }
+        
+        const tarefa = await response.json();
+        
+        const titulo = document.getElementById('nome-tarefa').value = tarefa.titulo;
+        const descricao = document.getElementById('descricao-tarefa').value = tarefa.descricao;
+        const prioridade = parseInt(document.getElementById('prioridade-tarefa').value = tarefa.prioridade);
+        let dataInicio = document.getElementById('tarefa-data-inicio').value = tarefa.dataInicio ? tarefa.dataInicio.split('T')[0] : '';
+        let dataFim = document.getElementById('tarefa-data-fim').value =  tarefa.dataFim ? tarefa.dataFim.split('T')[0] : '';
+        const materia = document.getElementById('materia-select').value = tarefa.materiaId
     }
-
 })
 
 document.addEventListener('click', async function deleteMateria(e) {
@@ -154,7 +178,6 @@ document.addEventListener('click', async function deleteMateria(e) {
     }
 
 })
-
 
 
 async function getAllTarefas(){
