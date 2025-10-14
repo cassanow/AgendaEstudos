@@ -1,5 +1,5 @@
 ﻿body{
-    background-color: dodgerblue;
+    background-color: rgb(38, 96, 152);;
     margin: 0;
     justify-content: center;
     align-items: center;
@@ -51,14 +51,14 @@
     margin-bottom: 30px;
     border: none;
     border-radius: 5px;
-    background-color: #3a9bdc;
+    background-color: dodgerblue;
     color: white;
     font-size: 15px;
     cursor: pointer;
 }
 
 .login-box button:hover {
-    background-color: lightskyblue;
+    background-color: rgb(38, 96, 152);;
 }
 
 .login-box a{
