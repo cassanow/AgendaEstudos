@@ -1,4 +1,6 @@
-﻿
+﻿let modoEdicao = false;
+let idMateria = null;
+
 document.addEventListener("DOMContentLoaded", () => {
     const menuItems = document.querySelectorAll(".menu-item");
     const currentPage = window.location.pathname.split("/").pop();
@@ -24,6 +26,7 @@ const btnNovaMateria = document.getElementById('btn-add-materia');
 const closeModalMateria = document.getElementById('close-materia');
 btnNovaMateria.addEventListener('click', () => {
     modalMateria.style.display = "block";
+    document.getElementById("modal-titulo").textContent = "Nova Matéria";
 });
 
 closeModalMateria.addEventListener('click', () => {
@@ -37,11 +40,15 @@ window.addEventListener('click', (event) => {
 });
 document.getElementById('btn-salvar').addEventListener('click', async function addMateria() {
     try{
+        const url = modoEdicao ? `https://localhost:7118/api/Materia/UpdateMateria/${idMateria}` : "https://localhost:7118/api/Materia/AddMateria";
+        const metodo = modoEdicao ? 'PUT' : 'POST';
+        
         const token = localStorage.getItem('token');
         const nome = document.getElementById('nome-materia').value;
         const prioridade = parseInt(document.getElementById('prioridade-materia').value);
-        const response = await fetch("https://localhost:7118/api/Materia/AddMateria", {
-            method: "POST",
+        
+        const response = await fetch(url, {
+            method: metodo,
             headers: {'Content-Type': 'application/json','Authorization': `Bearer ${token}`},
             body: JSON.stringify({nome, prioridade}),
         })
@@ -59,6 +66,26 @@ document.getElementById('btn-salvar').addEventListener('click', async function a
     }
 
 });
+
+document.addEventListener('click', async function(e) {
+    if(e.target.classList.contains('btn-edit')) {
+        modoEdicao = true;
+        idMateria = e.target.getAttribute('data-id');
+        const token = localStorage.getItem('token');
+        modalMateria.style.display = "block";
+        document.getElementById("modal-titulo").textContent = "Editar Matéria";
+        
+        const response = await fetch(`https://localhost:7118/api/Materia/GetMateria/${idMateria}`, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
+        })
+        
+        const materia = await response.json();
+        
+        const nome = document.getElementById('nome-materia').value = materia.nome;
+        const prioridade = parseInt(document.getElementById('prioridade-materia').value = materia.prioridade);
+    }
+})
 
 
 document.addEventListener('click', async function deleteMateria(e) {

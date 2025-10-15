@@ -34,6 +34,19 @@ public class MateriaController : Microsoft.AspNetCore.Mvc.Controller
         return Ok(materias);    
     }
 
+    [HttpGet("GetMateria/{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+        var materia = await _materiaRepository.GetMateria(id);
+        
+        if(userId != materia.UserId)
+            return Unauthorized();
+        
+        return Ok(materia);
+    }
+
 
     [HttpPost("AddMateria")]
     public async Task<IActionResult> AddMateria(MateriaDTO dto)

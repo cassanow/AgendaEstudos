@@ -8,13 +8,18 @@
     return true;
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const btnLogout = document.getElementById("btn-logout");
 
-document.getElementById("btn-logout").addEventListener("click", logout);
+    if (btnLogout) {
+        btnLogout.addEventListener("click", logout);
+    }
+});
+
 function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     window.location.href = "/Login.html";
-    return false;
 }
 
 function jaEstaLogado(){
