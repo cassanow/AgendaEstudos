@@ -1,4 +1,5 @@
 ﻿using AgendaEstudos.Enum;
+using AgendaEstudos.Model;
 
 namespace AgendaEstudos.DTO;
 
@@ -13,4 +14,6 @@ public class TarefaDTO
     public DateTime DataInicio { get; set; }
     
     public DateTime DataFim { get; set; }   
+    
+    public int MateriaId { get; set; }
 }

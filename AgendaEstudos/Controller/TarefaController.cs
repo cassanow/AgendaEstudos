@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Diagnostics;
+using System.Security.Claims;
 using AgendaEstudos.DTO;
 using AgendaEstudos.Interface;
 using AgendaEstudos.Model;
@@ -89,6 +90,7 @@ public class TarefaController : Microsoft.AspNetCore.Mvc.Controller
         tarefa.DataInicio = dto.DataInicio;
         tarefa.DataFim = dto.DataFim;
         tarefa.Prioridade = dto.Prioridade;
+        tarefa.MateriaId = dto.MateriaId;
         
         await _tarefaRepository.UpdateTarefa(tarefa);   
         
